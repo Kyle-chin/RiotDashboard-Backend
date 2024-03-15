@@ -3,8 +3,8 @@ const Schema = mongoose.Schema
 
 const accountSchema = new Schema({
     puuid:{type:String, require: true},
-    name: {type:String, require: true},
-    tagline: {type:String, require: true}
+    gameName: {type:String, require: true},
+    tagLine: {type:String, require: true}
 })
 
 const summonerSchema = new Schema({
@@ -29,9 +29,13 @@ const championMasterySchema = new Schema({
     tokensEarned: {type:Number, require: true}, 
     summonerId: {type:String, require: true}
 })
+const playerChampMastery = new Schema({
+    gameName:{type:String, require: true},
+    champMastery: [championMasterySchema]
+})
 
 const Summoners = mongoose.model('Summoners', summonerSchema, 'summoners')
-const ChampionMastery = mongoose.model('ChampionMastery', championMasterySchema, 'champion_mastery')
+const PlayerChampMastery = mongoose.model('PlayerChampMastery', playerChampMastery, 'champion_mastery')
 const Account = mongoose.model('Account', accountSchema, 'accounts')
-const mySchemas = {'Summoners':Summoners, 'ChampionMastery':ChampionMastery, 'Account':Account}
+const mySchemas = {'Summoners':Summoners, 'PlayerChampMastery':PlayerChampMastery, 'Account':Account}
 module.exports = mySchemas
